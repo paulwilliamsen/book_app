@@ -1,4 +1,61 @@
 body {
-  color: yellow;
+  color: white;
   background-color: #333;
+  font-family: 'Antic', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 4em;
+  color: white;
+
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: 500;
+}
+h2 {
+  text-align: center;
+  font-size: 2em;
+  color: white;
+  font-family: 'Antic', sans-serif;
+
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1;
+  grid-row-gap: 30px;
+
+  
+}
+
+section {
+  border: 2px solid white;
+  text-align: center;
+  padding-bottom: 48px;
+  margin: 0 5%;
+  height: 400px;
+  box-shadow: 8px 8px 5px black;
+  border-radius: 15px;
+}
+
+div {
+  height: 200px;
+}
+
+p {
+  height: 98px;
+  overflow: scroll;
+  margin: 20px;
+}
+
+@media (min-width: 300px){
+  
+  main {
+    grid-template-columns: 5;
+
+  }
 }

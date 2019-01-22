@@ -59,7 +59,7 @@ function Book(info) {
   const book = info.volumeInfo;
 
   this.title = book.title ? book.title : 'No Title Found';
-  this.author = book.authors ? book.authors[0] : 'This Book Wrote Itself';
+  this.authors = book.authors ? book.authors[0] : 'This Book Wrote Itself';
   this.img_url = book.imageLinks.thumbnail ? book.imageLinks.thumbnail : placeholderImage;
   this.description = book.description ? book.description : 'No Description Provided';
 }
