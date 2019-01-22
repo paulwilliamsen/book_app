@@ -1,8 +1,13 @@
+
 body {
   color: white;
   background-color: #333;
   font-family: 'Antic', sans-serif;
   margin: 0 5%;
+}
+
+header {
+  text-align: center;
 }
 
 h1 {
@@ -24,14 +29,18 @@ h2 {
 
 h3 {
   font-size: 1.5em;
-  height: 50px;
+  height: 75px;
   padding: 15px;
+  margin: 5px;
+  overflow: scroll;
+  vertical-align: middle;
 }
 
 h5 {
   margin: 15px;
   font-size: 1.2em;
   font-weight: 300;
+  height: 40px;
 }
 
 main {
