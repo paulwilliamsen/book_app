@@ -1,0 +1,29 @@
+
+form {
+  margin: 50px auto;
+}
+
+section {
+  border: 2px solid white;
+  text-align: center;
+  padding-bottom: 48px;
+  height: 400px;
+  box-shadow: 8px 8px 5px black;
+  border-radius: 15px;
+  grid-column: 90%;
+}
+
+img {
+  height: 100%;
+  box-shadow: 2px 2px 5px #ddd;
+}
+
+div {
+  height: 200px;
+}
+
+p {
+  height: 96px;
+  overflow: scroll;
+  margin: 20px;
+}
