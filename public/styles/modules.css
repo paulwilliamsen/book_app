@@ -1,13 +1,14 @@
 
 form {
-  margin: 50px auto;
+  margin: 20px auto;
+  grid-auto-columns: 100%;
 }
 
 section {
   border: 2px solid white;
   text-align: center;
   padding-bottom: 48px;
-  height: 400px;
+  height: 425px;
   box-shadow: 8px 8px 5px black;
   border-radius: 15px;
   grid-column: 90%;
@@ -19,11 +20,31 @@ img {
 }
 
 div {
-  height: 200px;
+  height: 150px;
 }
 
 p {
   height: 96px;
   overflow: scroll;
   margin: 20px;
+}
+
+input {
+  margin: 5px 10px;
+  height: 30px;
+  font-size: 25px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  font-family: 'Antic', sans-serif;
+}
+
+button {
+  height: 30px;
+  width: 150px;
+  margin: 15px;
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 20px;
+  vertical-align: middle;
+  font-weight: 700;
 }
