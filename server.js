@@ -31,19 +31,24 @@ function newSearch (request, response) {
 
 function sendSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-  console.log(request.body.search);
   if (request.body.type === 'title') { url += `+intitle:${request.body.search}`; }
   if (request.body.type === 'author') { url += `+inauthor:${request.body.search}`; }
+  console.log('url', url);
+
 
   return superagent.get(url)
     .then(apiResponse => {
       return apiResponse.body.items.map(bookResult => {
-        new Book(bookResult);
+        return new Book(bookResult);
       })
     })
-    .then(mapResults => response.render('./pages/searches/show', {mapResults}))
-    // .catch(error)
-
+    .then(mapResults => {
+      console.log(mapResults);
+      response.render('./pages/searches/show', {mapResults})
+    })
+    
+  // .catch(error)
+    
 }
 
 function Book(info) {
@@ -51,7 +56,7 @@ function Book(info) {
   const book = info.volumeInfo;
 
   this.title = book.title ? book.title : 'No Title Found';
-  this.author = book.authors ? book.authors : 'This Book Wrote Itself'
+  this.author = book.authors ? book.authors[0] : 'This Book Wrote Itself';
   this.img_url = book.imageLinks.thumbnail ? book.imageLinks.thumbnail : placeholderImage;
-  this.description = info.description ? info.description : 'No Description Provided'
+  this.description = book.description ? book.description : 'No Description Provided';
 }
