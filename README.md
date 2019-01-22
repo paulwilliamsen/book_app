@@ -46,18 +46,18 @@ Using google book API
 > **Actual time needed to complete:** 15min
 
 
-> **Number and name of feature:** #3 
+> **Number and name of feature:** #3 EJS Show
 >
-> **Estimate of time needed to complete:** _____
+> **Estimate of time needed to complete:** 60min
 >
-> **Start time:** _____
+> **Start time:** 10:30am (break from 11:30-12:00)
 > 
-> **Finish time:** _____
+> **Finish time:** 12:35am
 > 
-> **Actual time needed to complete:** _____
+> **Actual time needed to complete:** 95min
 
 
-> **Number and name of feature:** ____________________
+> **Number and name of feature:** #4 Error Handling
 >
 > **Estimate of time needed to complete:** _____
 >
