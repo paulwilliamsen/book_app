@@ -46,9 +46,12 @@ function sendSearch(request, response) {
       console.log(mapResults);
       response.render('./pages/searches/show', {mapResults})
     })
-    
-  // .catch(error)
-    
+    .catch(error => handleError(error, response));
+}
+
+function handleError(error, response) {
+  console.error(error);
+  if (response) response.status(500).send('Sorry, something went wrong! - Error written by PW & CB');
 }
 
 function Book(info) {
