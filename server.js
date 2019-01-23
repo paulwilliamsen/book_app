@@ -21,7 +21,7 @@ client.on('error', err => console.error(err));
 
 app.set('view engine', 'ejs');
 
-app.get('/', homeBooks);
+app.get('/', getSavedBooks);
 
 app.get('/searches/new', newSearch);
 app.post('/searches', sendSearch);
@@ -32,8 +32,14 @@ app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 // HELPER FUNCTIONS
 
-function homeBooks (request, response) {
-  response.render('./pages/index');
+function getSavedBooks (request, response) {
+  const SQL = 'SELECT * FROM saved;';
+
+  return client.query(SQL)
+    .then(results => {
+      response.render('./pages/index', {results: results.rows});
+    })
+    .catch(handleError);
 }
 
 function newSearch (request, response) {
@@ -54,7 +60,6 @@ function sendSearch(request, response) {
       })
     })
     .then(mapResults => {
-      console.log(mapResults);
       response.render('./pages/searches/show', {mapResults})
     })
     .catch(error => handleError(error, response));
@@ -70,7 +75,7 @@ function Book(info) {
   const book = info.volumeInfo;
 
   this.title = book.title ? book.title : 'No Title Found';
-  this.img_url = book.imageLinks.thumbnail ? book.imageLinks.thumbnail : placeholderImage;
+  this.img_url = book.imageLinks ? book.imageLinks.thumbnail : placeholderImage;
   this.authors = book.authors ? book.authors[0] : 'This Book Wrote Itself';
   this.isbn = book.industryIdentifiers[0].identifier ? `ISBN 13: ${book.industryIdentifiers[0].identifier}` : 'No ISBN Provided';
   this.description = book.description ? book.description : 'No Description Provided';

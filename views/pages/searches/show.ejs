@@ -20,16 +20,46 @@
     <h2>Search Results</h2>
     <main class="cards">
       <% mapResults.forEach(book => { %>
-        <section >
+        <section class="cards">
           <h3><%= book.title %></h3>
           <div><img src="<%= book.img_url %>" alt="<%= book.title %>"></div>
           <h5><%= book.authors %></h5>
           <p><%= book.description %></p>
+          <button>Select this Book</button>
         </section>
-        <section id="hidden-form">
-          <%- include('../books/form') -%>
+        <section class="form" class="hidden-form" id="<%= book.isbn %>">
+            <form action="/" method="POST">
+              <fieldset>
+                <label for="title">
+                  <section>Title</section>
+                  <input type="text" name="title" value="<%= book.title %>" required>
+                </label>
+                <label for="img_url">
+                  <section>Image URL</section>
+                  <input type="text" name="img_url" value="<%= book.img_url %>" required>
+                </label>
+                <label for="authors">
+                  <section>Author(s)</section>
+                  <input type="text" name="authors" value="<%= book.authors %>" required>
+                </label>
+                <label for="isbn">
+                  <section>ISBN</section>
+                  <input type="text" name="isbn" value="<%= book.isbn %>" required>
+                </label>
+                <label for="description">
+                  <section>Description</section>
+                  <textarea type="text" name="description" cols="60" rows="30" required><%= book.description %></textarea>
+                </label>
+                <label for="bookshelf">
+                  <section>Bookshelf</section>
+                  <input type="text" name="bookshelf" placeholder="Enter Bookshelf Name" required>
+                </label>
+              </fieldset>
+              <button type="submit">Save</button>
+            </form>
         </section>
-      <% }) %>
+      <% }); %>
     </main>
+    <script src="../../public/app.js"></script>
   </body>
 </html>
