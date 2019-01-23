@@ -16,22 +16,19 @@
     <header>
       <h1>book app</h1>
       <hr>
-      <form action="/searches" method="POST">
-        <input type="text" name="search" placeholder="Enter a Title or Author" required>
-        <fieldset>
-          <label for="title">
-            <span>Title</span>
-            <input type="radio" name="type" value="title" required>
-          </label>
-          <label for="author">
-            <span>Author</span>
-            <input type="radio" name="type" value="author" required>
-          </label>
-        </fieldset>
-        <button type="submit">Search</button>
-      </form>
+      <% results.forEach(book => { %>
+        <section class="cards">
+          <h3><%= book.title %></h3>
+          <div><img src="<%= book.img_url %>" alt="<%= book.title %>"></div>
+          <h5><%= book.authors %></h5>
+          <p><%= book.description %></p>
+          <h6><%= book.bookshelf %></h6>
+          <button id="select-book" type="submit">Select this Book</button>
+        </section>
+      <% }; %>
     </header>
     <main>
     </main>
+    <script src="../../public/app.js"></script>
   </body>
 </html>

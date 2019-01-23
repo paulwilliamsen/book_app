@@ -15,14 +15,13 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
 // Database Setup
-
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err));
 
 app.set('view engine', 'ejs');
 
-// app.get('/', homeBooks);
+app.get('/', getSavedBooks);
 
 app.get('/searches/new', newSearch);
 app.post('/searches', sendSearch);
@@ -33,70 +32,37 @@ app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 // HELPER FUNCTIONS
 
-function newSearch (request, response) {
-  response.render('./pages/index');
+function getSavedBooks (request, response) {
+  const SQL = 'SELECT * FROM saved;';
+
+  return client.query(SQL)
+    .then(results => {
+      response.render('./pages/index', {results: results.rows});
+    })
+    .catch(handleError);
 }
 
-// function sendSearch(request, response) {
-//   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-//   if (request.body.type === 'title') { url += `+intitle:${request.body.search}`; }
-//   if (request.body.type === 'author') { url += `+inauthor:${request.body.search}`; }
+function newSearch (request, response) {
+  response.render('./pages/searches/new');
+}
 
-
-
-//   return superagent.get(url)
-//     .then(apiResponse => {
-//       return apiResponse.body.items.map(bookResult => {
-//         return new Book(bookResult);
-//       })
-//     })
-//     .then(mapResults => {
-//       response.render('./pages/searches/show', {mapResults})
-//     })
-//     .catch(error => handleError(error, response));
-// }
-
-function sendSearch(request) {
+function sendSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
   if (request.body.type === 'title') { url += `+intitle:${request.body.search}`; }
   if (request.body.type === 'author') { url += `+inauthor:${request.body.search}`; }
+  console.log('url', url);
+
 
   return superagent.get(url)
     .then(apiResponse => {
-      if (!apiResponse.body.items.length) {
-        throw 'No Book Results';
-      } else {
-        let newBook = new Book(apiResponse);
-        return newBook.save()
-          .then(result => {
-            newBook.id = result.rows[0].id;
-            return newBook;
-          })
-      }
-    });
-}
-
-function getSearch(request, response) {
-  const searchHandler = {
-    query: request.body.data,
-    
-    cacheHit: results => {
-      console.log('Recieved search data from SQL');
-      response.send(results.rows[0]);
-    },
-
-    cacheMiss: () => {
-      sendSearch(request.body.data)
-        .then(data => response.send(data));
-    },
-
-  };
-  searchLookup(searchHandler);
-}
-
-searchLookup = (handler, table) => {
-  const sql = `SELECT * FROM ${table} WHERE query=$1;`;
-  const values = []
+      return apiResponse.body.items.map(bookResult => {
+        return new Book(bookResult);
+      })
+    })
+    .then(mapResults => {
+      response.render('./pages/searches/show', {mapResults})
+    })
+    .catch(error => handleError(error, response));
 }
 
 function handleError(error, response) {
@@ -104,14 +70,13 @@ function handleError(error, response) {
   if (response) response.status(500).send('Sorry, something went wrong! - Error written by PW & CB');
 }
 
-function Book(query, apiResult) {
+function Book(info) {
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-  const book = apiResult.volumeInfo;
+  const book = info.volumeInfo;
 
   this.title = book.title ? book.title : 'No Title Found';
-  this.img_url = book.imageLinks.thumbnail ? book.imageLinks.thumbnail : placeholderImage;
+  this.img_url = book.imageLinks ? book.imageLinks.thumbnail : placeholderImage;
   this.authors = book.authors ? book.authors[0] : 'This Book Wrote Itself';
   this.isbn = book.industryIdentifiers[0].identifier ? `ISBN 13: ${book.industryIdentifiers[0].identifier}` : 'No ISBN Provided';
   this.description = book.description ? book.description : 'No Description Provided';
-  this.search_query = query.search.toLowerCase();
 }
