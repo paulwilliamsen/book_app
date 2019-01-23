@@ -22,7 +22,7 @@ client.on('error', err => console.error(err));
 
 app.set('view engine', 'ejs');
 
-// app.get('/', homeBooks);
+app.get('/', homeBooks);
 
 app.get('/searches/new', newSearch);
 app.post('/searches', sendSearch);
@@ -33,28 +33,13 @@ app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 // HELPER FUNCTIONS
 
-function newSearch (request, response) {
+function homeBooks (request, response) {
   response.render('./pages/index');
 }
 
-// function sendSearch(request, response) {
-//   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-//   if (request.body.type === 'title') { url += `+intitle:${request.body.search}`; }
-//   if (request.body.type === 'author') { url += `+inauthor:${request.body.search}`; }
-
-
-
-//   return superagent.get(url)
-//     .then(apiResponse => {
-//       return apiResponse.body.items.map(bookResult => {
-//         return new Book(bookResult);
-//       })
-//     })
-//     .then(mapResults => {
-//       response.render('./pages/searches/show', {mapResults})
-//     })
-//     .catch(error => handleError(error, response));
-// }
+function newSearch (request, response) {
+  response.render('./pages/searches/new');
+}
 
 function sendSearch(request) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
@@ -79,7 +64,7 @@ function sendSearch(request) {
 function getSearch(request, response) {
   const searchHandler = {
     query: request.body.data,
-    
+
     cacheHit: results => {
       console.log('Recieved search data from SQL');
       response.send(results.rows[0]);
@@ -94,7 +79,7 @@ function getSearch(request, response) {
   searchLookup(searchHandler);
 }
 
-searchLookup = (handler, table) => {
+function searchLookup(handler, table) {
   const sql = `SELECT * FROM ${table} WHERE query=$1;`;
   const values = []
 }
@@ -113,5 +98,4 @@ function Book(query, apiResult) {
   this.authors = book.authors ? book.authors[0] : 'This Book Wrote Itself';
   this.isbn = book.industryIdentifiers[0].identifier ? `ISBN 13: ${book.industryIdentifiers[0].identifier}` : 'No ISBN Provided';
   this.description = book.description ? book.description : 'No Description Provided';
-  this.search_query = query.search.toLowerCase();
 }

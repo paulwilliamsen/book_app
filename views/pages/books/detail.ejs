@@ -1,0 +1,29 @@
+<form action="/" method="POST">
+  <fieldset>
+    <label for="title">
+      <section>Title</section>
+      <input type="text" name="title" value="<% book.title %>" required>
+    </label>
+    <label for="img_url">
+      <section>Image URL</section>
+      <input type="text" name="img_url" value="<% book.img_url %>" required>
+    </label>
+    <label for="authors">
+      <section>Author(s)</section>
+      <input type="text" name="authors" value="<% book.authors %>" required>
+    </label>
+    <label for="isbn">
+      <section>ISBN</section>
+      <input type="number" name="isbn" value="<% book.isbn %>" required>
+    </label>
+    <label for="description">
+      <section>Description</section>
+      <input type="text" name="description" value="<% book.description %>" required>
+    </label>
+    <label for="bookshelf">
+      <section>Bookshelf</section>
+      <input type="text" name="bookshelf" placeholder="Enter Bookshelf Name" required>
+    </label>
+  </fieldset>
+  <button type="submit">Save</button>
+</form>

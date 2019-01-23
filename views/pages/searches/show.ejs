@@ -26,6 +26,9 @@
           <h5><%= book.authors %></h5>
           <p><%= book.description %></p>
         </section>
+        <section id="hidden-form">
+          <%- include('../books/detail') -%>
+        </section>
       <% }) %>
     </main>
   </body>
