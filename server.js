@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: true}));
 
-app.use(express.static('./public'));
+app.use(express.static('public'));
 
 // Database Setup
 const client = new pg.Client(process.env.DATABASE_URL);
