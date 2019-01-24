@@ -22,7 +22,12 @@
     </label>
     <label for="bookshelf">
       <section>Bookshelf</section>
-      <input type="text" name="bookshelf" placeholder="Enter Bookshelf Name" required>
+      <select>
+        <% bookshelves.forEach(shelf => { %>
+          <option value="<%= shelf.bookshelf %>"><%= shelf.bookshelf %></option> 
+        <% }); %>
+
+      </select>
     </label>
   </fieldset>
   <button type="submit">Save To Database</button>
