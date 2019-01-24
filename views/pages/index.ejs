@@ -24,9 +24,7 @@
           <h3><%= book.title %></h3>
           <div><img src="<%= book.img_url %>" alt="<%= book.title %>"></div>
           <h5><%= book.authors %></h5>
-          <p><%= book.description %></p>
-          <h6><%= book.bookshelf %></h6>
-          <button id="show-details" type="submit">Show Details</button>
+          <a href="/books/<%= book.id %>" class="show-details" >Show Details</a>
         </section>
       <% }); %>
     </header>
