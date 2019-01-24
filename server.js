@@ -53,7 +53,7 @@ function getOneBookDetail(request, response) {
   const values = [request.params.book_id];
 
   return client.query(SQL, values)
-    .then(result => response.render('./pages/books/details', {book: result.rows[0]}))
+    .then(result => response.render('./pages/books/show', {book: result.rows[0]}))
     .catch(err => handleError(err, response));
 }
 
@@ -64,7 +64,7 @@ function saveBook (request, response) {
   const values = [title, img_url, authors, isbn, description, bookshelf];
 
   return client.query(SQL, values)
-    // .then(response.redirect('/'))
+    .then(response.redirect('/'))
     .catch(err => handleError(err, response));
 }
 

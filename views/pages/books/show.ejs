@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <%- include('./head') %>
+  <body>
+    <header>
+      <h1>book app</h1>
+      <a href="/">Saved Books</a>
+      <a href="/searches/new">Search API</a>
+      <hr>
+    </header>
+    <h4>Details</h4>
+    <section class="cards">
+        <%- include('./card', {book: book}) %>
+        <%- include('./details', {book: book}) %>
+      <button class="select-book">Edit This Book</button>
+      <%- include('../books/form', {book: book}) %>
+    </section>
+    <main>
+    </main>
+    <script type="text/javascript" src="../../../app.js"></script>
+  </body>
+</html>
