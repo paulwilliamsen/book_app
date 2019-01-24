@@ -74,8 +74,8 @@ function newSearch (request, response) {
 
 function sendSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-  if (request.body.type === 'title') { url += `+intitle:${request.body.search}`; }
-  if (request.body.type === 'author') { url += `+inauthor:${request.body.search}`; }
+  if (request.body.type === 'title') url += `+intitle:${request.body.search.toLowerCase()}`
+  if (request.body.type === 'author') url += `+inauthor:${request.body.search.toLowerCase()}`
 
   return superagent.get(url)
     .then(apiResponse => {
@@ -101,6 +101,6 @@ function Book(info) {
   this.title = book.title ? book.title : 'No Title Found';
   this.img_url = book.imageLinks ? book.imageLinks.thumbnail : placeholderImage;
   this.authors = book.authors ? book.authors[0] : 'This Book Wrote Itself';
-  this.isbn = book.industryIdentifiers[0].identifier ? `ISBN 13: ${book.industryIdentifiers[0].identifier}` : 'No ISBN Provided';
+  this.isbn = book.industryIdentifiers ? `ISBN 13: ${book.industryIdentifiers[0].identifier}` : 'No ISBN Provided';
   this.description = book.description ? book.description : 'No Description Provided';
 }

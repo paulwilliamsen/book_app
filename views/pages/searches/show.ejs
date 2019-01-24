@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <%- include('../books/head') %>
+    <%- include('../layout/head') %>
     <body>
     <header>
       <h1>book app</h1>
@@ -13,10 +13,10 @@
     <ul class="cards">
       <% mapResults.forEach(book => { %>
         <li class="cards">
-            <%- include('../books/card', {book: book}) %>
+            <%- include('../layout/card', {book: book}) %>
             <p><%= book.description %></p>
           <button class="select-book">Select This Book</button>
-          <%- include('../books/form', {book: book}) %>
+          <%- include('../layout/form', {book: book}) %>
         </li>
       <% }); %>
     </ul>
