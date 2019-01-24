@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <%- include('../books/head') %>
+    <%- include('../layout/head') %>
     <body>
     <header>
       <h1>book app</h1>
@@ -9,15 +9,15 @@
       <a href="/searches/new">Search API</a>
       <hr>
       <form action="/searches" method="POST">
-        <input type="text" name="search" placeholder="Enter a Title or Author" required>
+        <input class="search-input" type="text" name="search" placeholder="Enter a Title or Author" required>
         <fieldset>
           <label for="title">
             <span>Title</span>
-            <input type="radio" name="type" value="title" required>
+            <input class="radio" type="radio" name="type" value="title" required>
           </label>
           <label for="author">
             <span>Author</span>
-            <input type="radio" name="type" value="author" required>
+            <input class="radio" type="radio" name="type" value="author" required>
           </label>
         </fieldset>
         <button type="submit">Search</button>

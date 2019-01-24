@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <%- include('./head') %>
+  <%- include('../layout/head') %>
   <body>
     <header>
       <h1>book app</h1>
@@ -9,14 +9,15 @@
       <a href="/searches/new">Search API</a>
       <hr>
     </header>
-    <h4>Details</h4>
-    <section class="cards">
-        <%- include('./card', {book: book}) %>
-        <%- include('./details', {book: book}) %>
-      <button class="select-book">Edit This Book</button>
-      <%- include('../books/form', {book: book}) %>
-    </section>
     <main>
+      <h2>Details</h4>
+      <ul id="bookcase"></ul>
+        <li class="cards">
+            <%- include('../layout/card', {book: book}) %>
+            <%- include('../layout/details', {book: book}) %>
+          <button class="select-book">Edit This Book</button>
+          <%- include('../layout/form', {book: book}) %>
+        </li>
     </main>
     <script type="text/javascript" src="../../../app.js"></script>
   </body>

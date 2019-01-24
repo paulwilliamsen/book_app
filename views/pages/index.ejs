@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <%- include('./books/head') %>
+    <%- include('./layout/head') %>
     <body>
     <header>
       <h1>book app</h1>
       <a href="/">Saved Books</a>
       <a href="/searches/new">Search API</a>
       <hr>
-      <h4><%= results.length ? results.length : '0' %> <%= results.length === 1 ? 'Book in Collection' : 'Books in Collection' %></h4>
-      <% results.forEach(book => { %>
-        <section class="cards">
-          <%- include('./books/card', {book: book}) %>
-          <a href="/books/<%= book.id %>" class="show-details" >Show Details</a>
-        </section>
-      <% }); %>
     </header>
-    <main>
+      <main>
+        <h2><%= results.length ? results.length : '0' %> <%= results.length === 1 ? 'Book in Collection' : 'Books in Collection' %></h4>
+        <ul id="bookcase">
+          <% results.forEach(book => { %>
+            <li class="cards">
+              <%- include('./layout/card', {book: book}) %>
+              <a href="/books/<%= book.id %>" class="show-details" >Show Details</a>
+            </li>
+          <% }); %>
+        </ul>
     </main>
     <script src="../../public/app.js"></script>
   </body>

@@ -1,6 +1,6 @@
 
 @media (min-width: 600px){
-  main {
+  #bookcase {
     grid-template-columns: 45% 45%;
     grid-column-gap: 30px;
     margin: 0 auto;
@@ -8,7 +8,7 @@
 }
 
 @media (min-width: 960px){
-  main {
+  #bookcase {
     grid-template-columns: 30% 30% 30%;
     grid-column-gap: 30px;
     margin: 0 auto;
@@ -17,4 +17,9 @@
 
 .hidden-form {
   display: none;
+}
+
+.visible-form {
+  text-align: center;
+  width: 100%;
 }

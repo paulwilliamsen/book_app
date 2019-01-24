@@ -1,5 +1,7 @@
 'use strict';
 
+// Require Dependencies
+
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
@@ -10,16 +12,19 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-app.use(express.urlencoded({extended: true}));
 
+// Database Initialization
 
-app.use(express.static('public'));
-
-
-// Database Setup
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err));
+
+
+// ROUTES
+
+app.use(express.urlencoded({extended: true}));
+
+app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
 
@@ -35,6 +40,7 @@ app.get('/books/:book_id', getOneBookDetail);
 app.get('*', (request, response) => response.status(404).send('This route does not exist'));
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+
 
 // HELPER FUNCTIONS
 
@@ -74,8 +80,8 @@ function newSearch (request, response) {
 
 function sendSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-  if (request.body.type === 'title') { url += `+intitle:${request.body.search}`; }
-  if (request.body.type === 'author') { url += `+inauthor:${request.body.search}`; }
+  if (request.body.type === 'title') url += `+intitle:${request.body.search.toLowerCase()}`
+  if (request.body.type === 'author') url += `+inauthor:${request.body.search.toLowerCase()}`
 
   return superagent.get(url)
     .then(apiResponse => {
@@ -101,6 +107,6 @@ function Book(info) {
   this.title = book.title ? book.title : 'No Title Found';
   this.img_url = book.imageLinks ? book.imageLinks.thumbnail : placeholderImage;
   this.authors = book.authors ? book.authors[0] : 'This Book Wrote Itself';
-  this.isbn = book.industryIdentifiers[0].identifier ? `ISBN 13: ${book.industryIdentifiers[0].identifier}` : 'No ISBN Provided';
+  this.isbn = book.industryIdentifiers ? `ISBN 13: ${book.industryIdentifiers[0].identifier}` : 'No ISBN Provided';
   this.description = book.description ? book.description : 'No Description Provided';
 }
