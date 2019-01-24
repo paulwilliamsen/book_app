@@ -55,14 +55,20 @@ function getSavedBooks (request, response) {
 }
 
 function getOneBookDetail(request, response) {
-  const SQL = 'SELECT * FROM saved WHERE id=$1;';
-  const values = [request.params.book_id];
-
-  return client.query(SQL, values)
-    .then(result => response.render('./pages/books/show', {book: result.rows[0]}))
-    .catch(err => handleError(err, response));
+  getBookshelves()
+    .then(shelves => {
+      const SQL = 'SELECT * FROM saved WHERE id=$1;';
+      const values = [request.params.book_id];
+      return client.query(SQL, values)
+        .then(result => response.render('./pages/books/show', {book: result.rows[0], bookshelves: shelves.rows}))
+        .catch(err => handleError(err, response));
+    })
 }
 
+function getBookshelves() {
+  let SQL = 'SELECT DISTINCT bookshelf FROM saved ORDER BY bookshelf;';
+  return client.query(SQL)
+}
 
 function saveBook (request, response) {
   const {title, img_url, authors, isbn, description, bookshelf} = request.body;
