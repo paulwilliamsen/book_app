@@ -7,7 +7,7 @@ CREATE TABLE saved (
   title VARCHAR(255),
   img_url TEXT,
   authors VARCHAR(255),
-  isbn VARCHAR(20),
+  isbn VARCHAR(50),
   description TEXT,
   bookshelf VARCHAR(255)
 );

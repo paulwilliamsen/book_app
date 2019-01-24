@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: true}));
 
+
 app.use(express.static('public'));
 
 // Database Setup
@@ -25,6 +26,8 @@ app.get('/', getSavedBooks);
 
 app.get('/searches/new', newSearch);
 app.post('/searches', sendSearch);
+
+app.post('/', saveBook);
 
 app.get('*', (request, response) => response.status(404).send('This route does not exist'));
 
@@ -40,6 +43,16 @@ function getSavedBooks (request, response) {
       response.render('./pages/index', {results: results.rows});
     })
     .catch(handleError);
+}
+
+function saveBook (request, response) {
+  const {title, img_url, authors, isbn, description, bookshelf} = request.body;
+  const SQL = 'INSERT INTO saved (title, img_url, authors, isbn, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+  const values = [title, img_url, authors, isbn, description, bookshelf];
+
+  return client.query(SQL, values)
+    .then(response.redirect('/'))
+    .catch(err => handleError(err, response));
 }
 
 function newSearch (request, response) {
