@@ -29,7 +29,7 @@
           <p><%= book.description %></p>
 
           <button class="select-book">Select This Book</button>
-          <%- include('../views/pages/books/form') %>
+          <%- include('../books/form', {book: book}) %>
         </li>
       <% }); %>
     </ul>

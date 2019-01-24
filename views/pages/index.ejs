@@ -18,6 +18,7 @@
       <a href="/">Saved Books</a>
       <a href="/searches/new">Search API</a>
       <hr>
+      <h4><%= results.length ? results.length : '0' %> <%= results.length === 1 ? 'Book in Collection' : 'Books in Collection' %></h4>
       <% results.forEach(book => { %>
         <section class="cards">
           <h3><%= book.title %></h3>
