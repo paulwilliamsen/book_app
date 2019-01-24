@@ -50,8 +50,6 @@ function sendSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
   if (request.body.type === 'title') { url += `+intitle:${request.body.search}`; }
   if (request.body.type === 'author') { url += `+inauthor:${request.body.search}`; }
-  console.log('url', url);
-
 
   return superagent.get(url)
     .then(apiResponse => {

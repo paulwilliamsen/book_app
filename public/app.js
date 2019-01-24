@@ -1,5 +1,6 @@
 'use strict';
 
-$('#select-book').on('click', function() {
-  $('.hidden-form').toggle();
+// Listening to 'Select This Book' Buttons
+$('.select-book').on('click', function() {
+  $(this).next().toggleClass('hidden-form');
 });

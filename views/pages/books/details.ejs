@@ -6,59 +6,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="../../styles/reset.css" type="text/css">
-    <link rel="stylesheet" href="../../styles/base.css" type="text/css">
-    <link rel="stylesheet" href="../../styles/modules.css" type="text/css">
-    <link rel="stylesheet" href="../../styles/layout.css" type="text/css">
+    <link rel="stylesheet" href="./styles/reset.css" type="text/css">
+    <link rel="stylesheet" href="./styles/base.css" type="text/css">
+    <link rel="stylesheet" href="./styles/modules.css" type="text/css">
+    <link rel="stylesheet" href="./styles/layout.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Advent+Pro%7CAntic" rel="stylesheet">
   </head>
   <body>
     <header>
       <h1>book app</h1>
       <hr>
-    </header>
-    <h2>Search Results</h2>
-    <ul class="cards">
-      <% mapResults.forEach(book => { %>
-        <li class="cards">
+      <% results.forEach(book => { %>
+        <section class="cards">
           <h3><%= book.title %></h3>
           <div><img src="<%= book.img_url %>" alt="<%= book.title %>"></div>
           <h5><%= book.authors %></h5>
           <p><%= book.description %></p>
-
-          <button class="select-book">Select This Book</button>
-          <form class="hidden-form" action="/" method="POST">
+          <h6><%= book.bookshelf %></h6>
+          <button id="select-book" type="submit">Show Details</button>
+        </section>
+        <section class="form" class="hidden-form" id="<%= book.isbn %>">
+          <form action="/" method="POST">
             <fieldset>
               <label for="title">
-                <section>Title</section>  
-                <input type="text" name="title" value="<% book.title %>" required>
+                <section>Title</section>
+                <input type="text" name="title" value="<%= book.title %>" required>
               </label>
               <label for="img_url">
                 <section>Image URL</section>
-                <input type="text" name="img_url" value="<% book.img_url %>" required>
+                <input type="text" name="img_url" value="<%= book.img_url %>" required>
               </label>
               <label for="authors">
                 <section>Author(s)</section>
-                <input type="text" name="authors" value="<% book.authors %>" required>
+                <input type="text" name="authors" value="<%= book.authors %>" required>
               </label>
               <label for="isbn">
                 <section>ISBN</section>
-                <input type="number" name="isbn" value="<% book.isbn %>" required>
+                <input type="text" name="isbn" value="<%= book.isbn %>" required>
               </label>
               <label for="description">
                 <section>Description</section>
-                <input type="text" name="description" value="<% book.description %>" required>
+                <textarea type="text" name="description" cols="60" rows="30" required><%= book.description %></textarea>
               </label>
               <label for="bookshelf">
                 <section>Bookshelf</section>
                 <input type="text" name="bookshelf" placeholder="Enter Bookshelf Name" required>
               </label>
             </fieldset>
-            <button type="submit">Save To Database</button>
+            <button type="submit">Save</button>
           </form>
-        </li>
+        </section>
       <% }); %>
-    </ul>
-    <script type="text/javascript" src="./app.js"></script>
+    </header>
+    <main>
+    </main>
+    <script type="text/javascript" src="../../../app.js"></script>
   </body>
 </html>
