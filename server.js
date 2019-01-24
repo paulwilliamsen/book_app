@@ -15,6 +15,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(express.static('public'));
 
+
 // Database Setup
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
