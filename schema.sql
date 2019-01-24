@@ -1,4 +1,3 @@
--- \c book_app;
 
 DROP TABLE IF EXISTS saved;
 
