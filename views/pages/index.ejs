@@ -10,13 +10,15 @@
       <hr>
     </header>
       <main>
-      <h4><%= results.length ? results.length : '0' %> <%= results.length === 1 ? 'Book in Collection' : 'Books in Collection' %></h4>
-      <% results.forEach(book => { %>
-        <section class="cards">
-          <%- include('./layout/card', {book: book}) %>
-          <a href="/books/<%= book.id %>" class="show-details" >Show Details</a>
-        </section>
-      <% }); %>
+        <h2><%= results.length ? results.length : '0' %> <%= results.length === 1 ? 'Book in Collection' : 'Books in Collection' %></h4>
+        <ul id="bookcase">
+          <% results.forEach(book => { %>
+            <li class="cards">
+              <%- include('./layout/card', {book: book}) %>
+              <a href="/books/<%= book.id %>" class="show-details" >Show Details</a>
+            </li>
+          <% }); %>
+        </ul>
     </main>
     <script src="../../public/app.js"></script>
   </body>

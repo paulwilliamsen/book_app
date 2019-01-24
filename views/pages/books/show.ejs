@@ -10,13 +10,14 @@
       <hr>
     </header>
     <main>
-    <h4>Details</h4>
-    <section class="cards">
-        <%- include('../layout/card', {book: book}) %>
-        <%- include('../layout/details', {book: book}) %>
-      <button class="select-book">Edit This Book</button>
-      <%- include('../layout/form', {book: book}) %>
-    </section>
+      <h2>Details</h4>
+      <ul id="bookcase"></ul>
+        <li class="cards">
+            <%- include('../layout/card', {book: book}) %>
+            <%- include('../layout/details', {book: book}) %>
+          <button class="select-book">Edit This Book</button>
+          <%- include('../layout/form', {book: book}) %>
+        </li>
     </main>
     <script type="text/javascript" src="../../../app.js"></script>
   </body>

@@ -9,17 +9,19 @@
       <a href="/searches/new">Search API</a>
       <hr>
     </header>
-    <h2>Search Results</h2>
-    <ul class="cards">
-      <% mapResults.forEach(book => { %>
-        <li class="cards">
-            <%- include('../layout/card', {book: book}) %>
-            <p><%= book.description %></p>
-          <button class="select-book">Select This Book</button>
-          <%- include('../layout/form', {book: book}) %>
-        </li>
-      <% }); %>
-    </ul>
+    <main>
+      <h2>Search Results</h2>
+      <ul id="bookcase">
+        <% mapResults.forEach(book => { %>
+          <li class="cards">
+              <%- include('../layout/card', {book: book}) %>
+              <p><%= book.description %></p>
+            <button class="select-book">Select This Book</button>
+            <%- include('../layout/form', {book: book}) %>
+          </li>
+        <% }); %>
+      </ul>
+    </main>
     <script type="text/javascript" src="./app.js"></script>
   </body>
 </html>

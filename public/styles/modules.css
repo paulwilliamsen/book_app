@@ -16,10 +16,15 @@ form {
 img {
   height: 100%;
   box-shadow: 2px 2px 5px #ddd;
+  text-align: center;
+  margin: 0 auto;
 }
 
 div {
-  height: 150px;
+  height: 300px;
+  width: 60%;
+  text-align: center;
+  margin: 0 auto;
 }
 
 p {
@@ -28,7 +33,7 @@ p {
   margin: 20px;
 }
 
-input {
+.search-input {
   margin: 5px 10px;
   height: 30px;
   font-size: 25px;
@@ -38,12 +43,55 @@ input {
   font-family: 'Antic', sans-serif;
 }
 
+input {
+  margin: 5px 10px;
+  width: 80%;
+  height: 20px;
+  font-size: 14px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 3px;
+  font-family: 'Antic', sans-serif;
+}
+
+textarea {
+  margin: 5px 10px;
+  width: 80%;
+  height: 10em;
+  overflow: scroll;
+  font-size: 14px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 3px;
+  font-family: 'Antic', sans-serif;
+}
+
 button {
   height: 30px;
-  width: 150px;
+  width: 60%;
   margin: 15px;
   font-family: 'Advent Pro', sans-serif;
   font-size: 20px;
   vertical-align: middle;
   font-weight: 700;
+}
+
+.details-form {
+  width: 100%;
+}
+
+.radio {
+  width: auto;
+}
+
+a {
+  display: inline-block;
+  width: 100px;
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+  color: rgb(230, 233, 36);
 }
