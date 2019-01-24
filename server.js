@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: true}));
 
-app.use(express.static('./public'));
+app.use(express.static('public'));
 
 // Database Setup
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -50,8 +50,6 @@ function sendSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
   if (request.body.type === 'title') { url += `+intitle:${request.body.search}`; }
   if (request.body.type === 'author') { url += `+inauthor:${request.body.search}`; }
-  console.log('url', url);
-
 
   return superagent.get(url)
     .then(apiResponse => {

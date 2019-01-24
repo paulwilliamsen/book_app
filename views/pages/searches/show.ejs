@@ -5,7 +5,7 @@
     <title>book app</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="../../styles/reset.css" type="text/css">
     <link rel="stylesheet" href="../../styles/base.css" type="text/css">
     <link rel="stylesheet" href="../../styles/modules.css" type="text/css">
@@ -15,51 +15,24 @@
   <body>
     <header>
       <h1>book app</h1>
+      <a href="/">Saved Books</a>
+      <a href="/searches/new">Search API</a>
       <hr>
     </header>
     <h2>Search Results</h2>
-    <main class="cards">
+    <ul class="cards">
       <% mapResults.forEach(book => { %>
-        <section class="cards">
+        <li class="cards">
           <h3><%= book.title %></h3>
           <div><img src="<%= book.img_url %>" alt="<%= book.title %>"></div>
           <h5><%= book.authors %></h5>
           <p><%= book.description %></p>
-          <button>Select this Book</button>
-        </section>
-        <section class="form" class="hidden-form" id="<%= book.isbn %>">
-            <form action="/" method="POST">
-              <fieldset>
-                <label for="title">
-                  <section>Title</section>
-                  <input type="text" name="title" value="<%= book.title %>" required>
-                </label>
-                <label for="img_url">
-                  <section>Image URL</section>
-                  <input type="text" name="img_url" value="<%= book.img_url %>" required>
-                </label>
-                <label for="authors">
-                  <section>Author(s)</section>
-                  <input type="text" name="authors" value="<%= book.authors %>" required>
-                </label>
-                <label for="isbn">
-                  <section>ISBN</section>
-                  <input type="text" name="isbn" value="<%= book.isbn %>" required>
-                </label>
-                <label for="description">
-                  <section>Description</section>
-                  <textarea type="text" name="description" cols="60" rows="30" required><%= book.description %></textarea>
-                </label>
-                <label for="bookshelf">
-                  <section>Bookshelf</section>
-                  <input type="text" name="bookshelf" placeholder="Enter Bookshelf Name" required>
-                </label>
-              </fieldset>
-              <button type="submit">Save</button>
-            </form>
-        </section>
+
+          <button class="select-book">Select This Book</button>
+          <%- include('../views/pages/books/form') %>
+        </li>
       <% }); %>
-    </main>
-    <script src="../../public/app.js"></script>
+    </ul>
+    <script type="text/javascript" src="./app.js"></script>
   </body>
 </html>
