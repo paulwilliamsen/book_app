@@ -60,10 +60,9 @@ function getOneBookDetail(request, response) {
       console.log('got to part 1');
       const SQL = 'SELECT * FROM saved WHERE id=$1;';
       const values = [request.params.book_id];
+
       return client.query(SQL, values)
-        
         .then(result => {
-          console.log('shelves', result.rows);
           response.render('./pages/books/show', {book: result.rows[0], bookshelves: shelves.rows});
         })
         .catch(err => handleError(err, response));
@@ -76,7 +75,8 @@ function getBookshelves() {
 }
 
 function saveBook (request, response) {
-  const {title, img_url, authors, isbn, description, bookshelf} = request.body;
+  let {title, img_url, authors, isbn, description, bookshelf} = request.body;
+  request.body.new_bookshelf ? bookshelf = request.body.new_bookshelf : bookshelf;
   const SQL = 'INSERT INTO saved (title, img_url, authors, isbn, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
   const values = [title, img_url, authors, isbn, description, bookshelf];
 
@@ -103,7 +103,6 @@ function sendSearch(request, response) {
     .then(mapResults => {
       getBookshelves()
         .then(bookshelves => {
-          console.log('bookshelf', bookshelves);
           response.render('./pages/searches/show', {mapResults, bookshelves: bookshelves.rows})
         })
     })
