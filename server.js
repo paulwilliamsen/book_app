@@ -57,10 +57,15 @@ function getSavedBooks (request, response) {
 function getOneBookDetail(request, response) {
   getBookshelves()
     .then(shelves => {
+      console.log('got to part 1');
       const SQL = 'SELECT * FROM saved WHERE id=$1;';
       const values = [request.params.book_id];
       return client.query(SQL, values)
-        .then(result => response.render('./pages/books/show', {book: result.rows[0], bookshelves: shelves.rows}))
+        
+        .then(result => {
+          console.log('shelves', result.rows);
+          response.render('./pages/books/show', {book: result.rows[0], bookshelves: shelves.rows});
+        })
         .catch(err => handleError(err, response));
     })
 }
@@ -96,7 +101,11 @@ function sendSearch(request, response) {
       })
     })
     .then(mapResults => {
-      response.render('./pages/searches/show', {mapResults})
+      getBookshelves()
+        .then(bookshelves => {
+          console.log('bookshelf', bookshelves);
+          response.render('./pages/searches/show', {mapResults, bookshelves: bookshelves.rows})
+        })
     })
     .catch(error => handleError(error, response));
 }
