@@ -70,7 +70,6 @@ function getSavedBooks (request, response) {
 function getOneBookDetail(request, response) {
   getBookshelves()
     .then(shelves => {
-      console.log('got to part 1');
       const SQL = 'SELECT * FROM saved WHERE id=$1;';
       const values = [request.params.book_id];
 
