@@ -27,7 +27,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(express.static('public'));
 
-app.use(methodOverride((request, response) => {
+app.use(methodOverride((request, response) => { // eslint-disable-line 
   if (request.body && typeof request.body === 'object' && '_method' in request.body) {
     let method = request.body._method;
     delete request.body._method;
@@ -93,7 +93,6 @@ function saveBook(request, response) {
   const values = [title, img_url, authors, isbn, description, bookshelf];
 
   return client.query(SQL, values)
-    .then(response.redirect('/'))
     .catch(err => handleError(err, response));
 }
 
