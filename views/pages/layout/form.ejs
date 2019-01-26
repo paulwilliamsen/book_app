@@ -1,5 +1,6 @@
-<form class="hidden-form" action="/" method="POST">
+<form class="hidden-form" id="<%= formAction %>" action="/<%= formAction === 'update' ? 'books/'+book.id : '' %>" method="post">
   <fieldset>
+    <input type="hidden" name="_method" value="<% formAction === 'update' ? 'put' : 'post' %>">
     <label for="title">
       <section>Title</section>  
       <input type="text" name="title" value="<%= book.title %>" required>
@@ -20,15 +21,19 @@
       <section>Description</section>
       <textarea type="text" name="description" required><%= book.description %></textarea>
     </label>
+    <label for="new-bookshelf">
+      <section>Bookshelf Name</section>
+      <input type="text" name="new_bookshelf" placeholder="Enter New Bookshelf Name or Select From List Below">
+    </label>
     <label for="bookshelf">
-      <section>Bookshelf</section>
-      <select>
+      <section>Existing Bookshelves</section>
+      <select name="bookshelf">
         <% bookshelves.forEach(shelf => { %>
-          <option value="<%= shelf.bookshelf %>"><%= shelf.bookshelf %></option> 
+          <% let selected = ( book.bookshelf === shelf.bookshelf ) ? 'selected' : ''; %>
+          <option value="<%= shelf.bookshelf %>" <%= selected %> ><%= shelf.bookshelf %></option> 
         <% }); %>
-
       </select>
     </label>
   </fieldset>
-  <button type="submit">Save To Database</button>
+  <button type="submit">Save Book</button>
 </form>

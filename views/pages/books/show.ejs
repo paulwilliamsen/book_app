@@ -16,7 +16,11 @@
             <%- include('../layout/card', {book: book}) %>
             <%- include('../layout/details', {book: book}) %>
           <button class="select-book">Edit This Book</button>
-          <%- include('../layout/form', {book: book, bookshelves: bookshelves}) %>
+          <%- include('../layout/form', {book: book, bookshelves: bookshelves, formAction: 'update'}) %>
+          <form action="/books/<%= book.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" >Delete</button>
+          </form>
         </li>
     </main>
     <script type="text/javascript" src="../../../app.js"></script>
