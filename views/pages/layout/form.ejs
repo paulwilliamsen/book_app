@@ -1,6 +1,6 @@
-<form class="hidden-form" id="<%= formAction %>" action="/<%= formAction === 'update' ? 'books/'+book.id : formAction === 'create' ? '/searches/new' : '' %>" method="post">
+<form class="hidden-form" id="<%= formAction %>" action="/<%= formAction === 'update' ? 'books/'+book.id : '' %>" method="post">
   <fieldset>
-    <input type="hidden" name="_method" value="<% formAction === 'update' ? 'put' : formAction === 'delete' ? 'delete' : 'post' %>">
+    <input type="hidden" name="_method" value="<% formAction === 'update' ? 'put' : 'post' %>">
     <label for="title">
       <section>Title</section>  
       <input type="text" name="title" value="<%= book.title %>" required>
@@ -36,5 +36,7 @@
     </label>
   </fieldset>
   <button type="submit">Save Book</button>
-  <button type="submit" class="<%= formAction === 'delete' ? 'show-delete' : 'hide-delete' %>">Delete</button>
+  <button type="submit" class="<%= formAction === 'create' ? 'hide-delete' : '' %>">Delete</button>
 </form>
+
+<%# formAction === 'update' ? 'books/'+book.id : formAction === 'create' ? 'searches/new' : '' %>
