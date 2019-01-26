@@ -17,7 +17,7 @@
               <%- include('../layout/card', {book: book}) %>
               <p><%= book.description %></p>
             <button class="select-book">Select This Book</button>
-            <%- include('../layout/form', {book: book, bookshelves}) %>
+            <%- include('../layout/form', {book: book, bookshelves, formAction: 'create'} %>
           </li>
         <% }); %>
       </ul>
