@@ -93,6 +93,7 @@ function saveBook(request, response) {
   const values = [title, img_url, authors, isbn, description, bookshelf];
 
   return client.query(SQL, values)
+    .then(response.redirect('/'))
     .catch(err => handleError(err, response));
 }
 
